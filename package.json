@@ -1,0 +1,27 @@
+{
+  "name": "fragments-ui_nsa",
+  "version": "0.0.1",
+  "description": "Fragments UI testing web app",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shutingcasey/fragments-ui_NSA.git"
+  },
+  "keywords": [],
+  "author": "ShutingHsu",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shutingcasey/fragments-ui_NSA/issues"
+  },
+  "homepage": "https://github.com/shutingcasey/fragments-ui_NSA#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "oidc-client-ts": "^3.5.0"
+  }
+}
