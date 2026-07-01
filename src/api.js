@@ -1,5 +1,7 @@
 // src/api.js
 
+import logger from './logger';
+
 // fragments microservice API to use, defaults to localhost:8080 if not set in env
 const apiUrl = process.env.API_URL || 'http://localhost:8080';
 
@@ -9,7 +11,7 @@ const apiUrl = process.env.API_URL || 'http://localhost:8080';
  * to have an `idToken` attached, so we can send that along with the request.
  */
 export async function getUserFragments(user) {
-  console.log('Requesting user fragments data...');
+  logger.info('Requesting user fragments data');
   try {
     const fragmentsUrl = new URL('/v1/fragments', apiUrl);
     const res = await fetch(fragmentsUrl, {
@@ -22,15 +24,15 @@ export async function getUserFragments(user) {
       throw new Error(`${res.status} ${res.statusText}`);
     }
     const data = await res.json();
-    console.log('Successfully got user fragments data', { data });
+    logger.info({ data }, 'Successfully got user fragments data');
     return data;
   } catch (err) {
-    console.error('Unable to call GET /v1/fragments', { err });
+    logger.error({ err }, 'Unable to call GET /v1/fragments');
   }
 }
 
 export async function createFragment(user, text) {
-  console.log('Creating fragment...');
+  logger.info('Creating fragment');
 
   const fragmentsUrl = new URL('/v1/fragments', apiUrl);
 
@@ -48,10 +50,15 @@ export async function createFragment(user, text) {
   }
 
   const data = await res.json();
-  console.log('Successfully created fragment', {
-    data,
-    location: res.headers.get('Location'),
-  });
+  const location = res.headers.get('Location');
+
+  logger.info(
+    {
+      data,
+      location,
+    },
+    'Successfully created fragment'
+  );
 
   return data;
 }

@@ -1,6 +1,7 @@
 // src/auth.js
 
 import { UserManager } from 'oidc-client-ts';
+import logger from './logger';
 
 const cognitoAuthConfig = {
   authority: `https://cognito-idp.us-east-2.amazonaws.com/${process.env.AWS_COGNITO_POOL_ID}`,
@@ -26,7 +27,14 @@ export async function signIn() {
 
 // Create a simplified view of the user, with an extra method for creating the auth headers
 function formatUser(user) {
-  console.log('User Authenticated', { user });
+  logger.info(
+  {
+    username: user.profile['cognito:username'],
+    email: user.profile.email,
+  },
+  'User authenticated'
+  );
+
   return {
     // If you add any other profile scopes, you can include them here
     username: user.profile['cognito:username'],
