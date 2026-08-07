@@ -13,7 +13,7 @@ const apiUrl = process.env.API_URL || 'http://localhost:8080';
 export async function getUserFragments(user) {
   logger.info('Requesting user fragments data');
   try {
-    const fragmentsUrl = new URL('/v1/fragments', apiUrl);
+    const fragmentsUrl = new URL('/v1/fragments?expand=1', apiUrl);
     const res = await fetch(fragmentsUrl, {
       // Generate headers with the proper Authorization bearer token to pass.
       // We are using the `authorizationHeaders()` helper method we defined
@@ -31,7 +31,7 @@ export async function getUserFragments(user) {
   }
 }
 
-export async function createFragment(user, text) {
+export async function createFragment(user, text, type) {
   logger.info('Creating fragment');
 
   const fragmentsUrl = new URL('/v1/fragments', apiUrl);
@@ -40,7 +40,7 @@ export async function createFragment(user, text) {
     method: 'POST',
     headers: {
       ...user.authorizationHeaders(),
-      'Content-Type': 'text/plain',
+      'Content-Type': type,
     },
     body: text,
   });
@@ -60,5 +60,8 @@ export async function createFragment(user, text) {
     'Successfully created fragment'
   );
 
-  return data;
+  return {
+    data,
+    location,
+  };
 }

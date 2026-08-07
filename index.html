@@ -21,16 +21,32 @@
       <h2>Create Fragment</h2>
 
       <form>
+        <label for="fragment-type">Fragment Type:</label>
+
+        <select id="fragment-type">
+          <option value="text/plain">Plain Text</option>
+          <option value="text/markdown">Markdown</option>
+          <option value="application/json">JSON</option>
+        </select>
+
+        <br /><br />
+
         <textarea
           id="fragment-text"
           rows="6"
-          placeholder="Enter your text fragment here..."
+          placeholder="Enter fragment content here..."
         ></textarea>
 
         <br />
 
         <button type="submit">Create</button>
       </form>
+    </section>
+
+    <section id="fragments-section" hidden>
+      <h2>Your Fragments</h2>
+
+      <div id="fragments-list"></div>
     </section>
     
   </body>

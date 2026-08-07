@@ -1,0 +1,8 @@
+node_modules
+dist
+.parcel-cache
+.git
+.github
+.vscode
+npm-debug.log
+README.md
